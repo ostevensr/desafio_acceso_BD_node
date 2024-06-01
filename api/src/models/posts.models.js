@@ -20,3 +20,10 @@ export const agregarPost = async ({titulo,img,descricpcion}) => {
 
 //Eliminar posts
 
+export const sacarPost = async (id) => {
+    const result = await pool.query(
+        'DELETE FROM posts WHERE id = $1 RETURNING *', [id]);
+    console.log(result.rows[0]);
+    return result.rows[0];
+};
+
