@@ -1,4 +1,4 @@
-import {extPostsModel, agregarPost, sacarPost} from '../models/posts.models.js'
+import {extPostsModel, agregarPost, sacarPost, meGusta} from '../models/posts.models.js'
 
 
 export const extPosts = async(req,res) => {
@@ -25,6 +25,16 @@ export const eliminarPost = async (req,res) =>{
         const { id } = req.params;
         const postEliminado = await sacarPost(id);
         res.status(200).json({ post: postEliminado });
+    } catch (error) {
+        res.status(500).json({error: error.message})
+    }
+};
+
+export const megustaPost = async (req,res) =>{
+    try {
+        const { id } = req.params;
+        const agregaMegusta = await meGusta(id);
+        res.status(200).json({ post: agregaMegusta });
     } catch (error) {
         res.status(500).json({error: error.message})
     }
